@@ -38,7 +38,7 @@ A minimalist, real-time currency converter for Zimbabwe and the SADC region — 
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 | Light Mode | Dark Mode |
 |---|---|
@@ -46,7 +46,7 @@ A minimalist, real-time currency converter for Zimbabwe and the SADC region — 
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 zim-currency-converter/
