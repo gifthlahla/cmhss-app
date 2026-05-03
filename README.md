@@ -1,4 +1,4 @@
-# zim-currency-converter
+# Zim-Currency-Converter
 
 A minimalist, real-time currency converter for Zimbabwe and the SADC region — built with vanilla HTML, CSS & JavaScript, featuring live rates, light/dark themes, and a clean 60-30-10 design system.
 
