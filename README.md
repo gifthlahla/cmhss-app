@@ -2,8 +2,6 @@
 
 A minimalist, real-time currency converter for Zimbabwe and the SADC region — built with vanilla HTML, CSS & JavaScript, featuring live rates, light/dark themes, and a clean 60-30-10 design system.
 
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
-
 ---
 
 ## Features
@@ -127,13 +125,9 @@ This project follows a strict single-step development protocol:
 
 ---
 
-## License
-
-MIT — feel free to use, modify, and share.
-
----
-
 ## Acknowledgements
 
 - Exchange rates provided by [ExchangeRate-API](https://www.exchangerate-api.com/)
 - Inspired by real-world currency needs in Zimbabwe and the SADC region
+
+---
