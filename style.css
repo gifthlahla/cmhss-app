@@ -85,3 +85,27 @@ ul {
 	list-style: none;
 }
 
+/* 2.3 — Layout: Card Container */
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: var(--space-md);
+}
+
+.app-container {
+	width: 100%;
+	max-width: 480px;
+	background-color: var(--color-surface-elevated);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-md);
+	padding: var(--space-xl);
+	transition: box-shadow var(--transition-base);
+}
+
+@media (min-width: 480px) {
+	.app-container {
+		padding: var(--space-2xl);
+	}
+}
+

@@ -34,6 +34,7 @@
 | 2026-05-13 | Antigravity | 1.3 | Currency dropdown population | — | ✅ |
 | 2026-05-13 | Antigravity | 2.1 | CSS custom properties (design tokens) | — | ✅ |
 | 2026-05-13 | Antigravity | 2.2 | CSS reset & base styles | — | ✅ |
+| 2026-05-13 | Antigravity | 2.3 | Layout: card container | — | ✅ |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |

@@ -182,7 +182,7 @@ const CURRENCIES = [
 - Background `--color-surface` color is visible around the card edges.
 - Card shows rounded corners and subtle shadow.
 
-- [ ] 2.3 — Layout: Card Container
+- [x] 2.3 — Layout: Card Container
 
 ---
 
