@@ -417,7 +417,7 @@ const CURRENCIES = [
 - The icon rotates with a smooth, fast animation.
 - Repeated clicks swap back and forth.
 
-- [ ] 4.3 — Swap Currencies Function
+- [x] 4.3 — Swap Currencies Function
 
 ---
 
@@ -442,7 +442,7 @@ const CURRENCIES = [
 - Loading state resolves cleanly when the response arrives.
 - Fast API responses don't produce a jarring flash.
 
-- [ ] 4.4 — Loading & Disabled States
+- [x] 4.4 — Loading & Disabled States
 
 ---
 
@@ -468,7 +468,7 @@ const CURRENCIES = [
 - Error state is visually distinct from success.
 - App recovers cleanly after an error.
 
-- [ ] 4.5 — Error Handling Complete
+- [x] 4.5 — Error Handling Complete
 
 ---
 
@@ -491,7 +491,7 @@ const CURRENCIES = [
 - ZWL shows no decimal places in all contexts.
 - Thousand separators appear correctly.
 
-- [ ] 5.1 — Number Formatting by Currency
+- [x] 5.1 — Number Formatting by Currency
 
 ---
 
@@ -535,7 +535,7 @@ const CURRENCIES = [
 - Screen reader announces errors immediately.
 - All controls have accessible names.
 
-- [ ] 5.3 — Screen Reader Accessibility
+- [x] 5.3 — Screen Reader Accessibility
 
 ---
 
@@ -561,7 +561,7 @@ const CURRENCIES = [
 - With `prefers-reduced-motion: reduce`, only essential transitions remain.
 - No animations cause layout shifts or jitter.
 
-- [ ] 5.4 — Animations & Micro-interactions
+- [x] 5.4 — Animations & Micro-interactions
 
 ---
 
@@ -582,7 +582,7 @@ const CURRENCIES = [
 - Social preview looks professional.
 - Browser chrome/status bar color matches the active theme.
 
-- [ ] 5.5 — Favicon & Meta Tags
+- [x] 5.5 — Favicon & Meta Tags
 
 ---
 
@@ -613,7 +613,7 @@ const CURRENCIES = [
 - All browsers in the matrix pass the checklist.
 - Any browser-specific issues are documented and fixed.
 
-- [ ] 5.6 — Cross-Browser Testing
+- [x] 5.6 — Cross-Browser Testing
 
 ---
 

@@ -118,6 +118,14 @@ function initTheme() {
     html.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     updateToggleUI(theme);
+    updateThemeColor(theme);
+  };
+
+  const updateThemeColor = (theme) => {
+    const meta = document.getElementById('theme-meta');
+    if (meta) {
+      meta.setAttribute('content', theme === 'dark' ? '#1A1D23' : '#0D6EFD');
+    }
   };
 
   toggle.addEventListener('click', () => {
@@ -125,18 +133,31 @@ function initTheme() {
     setTheme(currentTheme === 'light' ? 'dark' : 'light');
   });
 
-  // Sync UI with initial state (set by head script)
-  updateToggleUI(html.getAttribute('data-theme') || 'light');
+  // Sync UI and theme-color with initial state
+  const initialTheme = html.getAttribute('data-theme') || 'light';
+  updateToggleUI(initialTheme);
+  updateThemeColor(initialTheme);
 }
 
 function formatCurrency(amount, currencyCode) {
+  // ZWL and several others traditionally use no decimals
   const noDecimals = ['ZWL', 'JPY', 'KRW', 'TZS', 'MGA', 'KMF', 'CDF'].includes(currencyCode);
+  
   const options = {
     style: 'decimal',
     maximumFractionDigits: noDecimals ? 0 : 2,
     minimumFractionDigits: noDecimals ? 0 : 2
   };
+  
+  // Use en-ZW locale for Zimbabwe-relevant formatting (comma separators)
   return new Intl.NumberFormat('en-ZW', options).format(amount);
+}
+
+function formatRate(rate) {
+  // Show 4-6 significant digits based on magnitude
+  if (rate >= 100) return rate.toFixed(2);
+  if (rate >= 1) return rate.toFixed(4);
+  return rate.toPrecision(6);
 }
 
 function showResult(amount, from, converted, to, rate, timestamp) {
@@ -144,63 +165,165 @@ function showResult(amount, from, converted, to, rate, timestamp) {
   if (!panel) return;
 
   panel.classList.remove('error');
+  panel.removeAttribute('role'); 
   panel.hidden = false;
   
+  // Trigger pop animation
+  panel.classList.remove('success-pop');
+  void panel.offsetWidth; // Force reflow
+  panel.classList.add('success-pop');
+  
   panel.querySelector('.conversion-text').textContent = `${formatCurrency(amount, from)} ${from} = ${formatCurrency(converted, to)} ${to}`;
-  panel.querySelector('.rate-text').textContent = `1 ${from} = ${rate.toFixed(6).replace(/\.?0+$/, '')} ${to}`;
-  panel.querySelector('.timestamp').textContent = `Last updated: ${timestamp}`;
+  panel.querySelector('.rate-text').textContent = `1 ${from} = ${formatRate(rate)} ${to}`;
+  
+  // Format timestamp for better readability
+  const date = new Date(timestamp);
+  const formattedDate = date.toLocaleString('en-ZW', { 
+    day: 'numeric', 
+    month: 'short', 
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZoneName: 'short'
+  });
+  
+  panel.querySelector('.timestamp').textContent = `Last updated: ${formattedDate}`;
 }
 
-function showError(message) {
+function showError(type, customMessage = "") {
   const panel = document.querySelector('.result-panel');
   if (!panel) return;
 
+  const messages = {
+    'network': "No internet connection. Check your network and try again.",
+    'timeout': "Connection timed out. Please try again.",
+    'api': "Exchange rate service is currently unavailable. Please try again shortly.",
+    'rate-limit': "Too many requests. Please wait a moment before trying again.",
+    'invalid-amount': "Please enter a valid positive amount.",
+    'large-amount': "Amount is too large. Max: 1,000,000,000.",
+    'empty': "Please enter an amount to convert.",
+    'unsupported': "This currency pair is currently unavailable."
+  };
+
+  const message = customMessage || messages[type] || "An unexpected error occurred.";
+
   panel.classList.add('error');
+  panel.setAttribute('role', 'alert');
   panel.hidden = false;
-  panel.querySelector('.conversion-text').textContent = "Conversion Error";
+  panel.querySelector('.conversion-text').textContent = "⚠️ Error";
   panel.querySelector('.rate-text').textContent = message;
   panel.querySelector('.timestamp').textContent = "";
 }
 
 async function handleConversion(e) {
-  e.preventDefault();
+  if (e && e.preventDefault) e.preventDefault();
   
-  const form = e.target;
-  const amount = parseFloat(form.amount.value);
+  const form = document.getElementById('converter-form');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const amountStr = form.amount.value.trim();
+  const amount = parseFloat(amountStr);
   const from = form.from.value;
   const to = form.to.value;
 
   // 1. Validation
+  if (amountStr === "") {
+    showError('empty');
+    return;
+  }
   if (isNaN(amount) || amount <= 0) {
-    showError("Please enter a valid positive amount.");
+    showError('invalid-amount');
     return;
   }
   if (amount >= 1000000000) {
-    showError("Amount is too large. Max: 1,000,000,000.");
+    showError('large-amount');
     return;
   }
 
-  // 2. Same currency optimization
+  // 2. Loading state
+  const startTime = Date.now();
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Converting...";
+  submitBtn.setAttribute('aria-busy', 'true');
+
+  // 3. Same currency optimization
   if (from === to) {
     showResult(amount, from, amount, to, 1, new Date().toUTCString());
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Convert";
+    submitBtn.removeAttribute('aria-busy');
     return;
   }
 
-  // 3. Fetch and calculate
-  const result = await fetchRates(from);
-  if (!result.success) {
-    showError(result.error || "Failed to fetch exchange rates.");
-    return;
-  }
+  // 4. Fetch and calculate
+  try {
+    const result = await fetchRates(from);
+    
+    // Ensure minimum display time (300ms)
+    const elapsed = Date.now() - startTime;
+    if (elapsed < 300) {
+      await new Promise(resolve => setTimeout(resolve, 300 - elapsed));
+    }
 
-  const rate = result.rates[to];
-  if (!rate) {
-    showError(`Exchange rate for ${to} not found.`);
-    return;
-  }
+    if (!result.success) {
+      if (result.error === 'Connection timed out') {
+        showError('timeout');
+      } else if (result.error === 'quota-reached') {
+        showError('rate-limit');
+      } else if (result.error === 'unsupported-code') {
+        showError('unsupported');
+      } else if (!navigator.onLine) {
+        showError('network');
+      } else {
+        showError('api');
+      }
+      return;
+    }
 
-  const converted = amount * rate;
-  showResult(amount, from, converted, to, rate, result.lastUpdate);
+    const rate = result.rates[to];
+    if (!rate) {
+      showError('unsupported');
+      return;
+    }
+
+    const converted = amount * rate;
+    showResult(amount, from, converted, to, rate, result.lastUpdate);
+  } catch (err) {
+    showError('api');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Convert";
+    submitBtn.removeAttribute('aria-busy');
+  }
+}
+
+function initSwap() {
+  const swapBtn = document.getElementById('swap');
+  const fromSelect = document.getElementById('from');
+  const toSelect = document.getElementById('to');
+  const form = document.getElementById('converter-form');
+  const resultPanel = document.querySelector('.result-panel');
+
+  if (!swapBtn || !fromSelect || !toSelect || !form) return;
+
+  let rotation = 0;
+
+  swapBtn.addEventListener('click', () => {
+    // 1. Swap selections
+    const temp = fromSelect.value;
+    fromSelect.value = toSelect.value;
+    toSelect.value = temp;
+
+    // 2. Animate rotation (cumulative)
+    rotation += 180;
+    // Check if we are in stacked mode (mobile) to maintain the 90deg offset if needed
+    const isStacked = window.getComputedStyle(document.querySelector('.currency-row')).flexDirection === 'column';
+    swapBtn.style.transform = `rotate(${rotation + (isStacked ? 90 : 0)}deg)`;
+
+    // 3. Re-convert if result is visible
+    if (!resultPanel.hidden) {
+      handleConversion({ preventDefault: () => {}, target: form });
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -209,6 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   populateCurrencySelects();
   initTheme();
+  initSwap();
 
   // Enable transitions after initial paint to prevent theme flash
   setTimeout(() => {
