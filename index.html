@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>💱 Zim Currency Converter</title>
+	<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js" defer></script>
+</head>
+<body>
+	<header>
+		<h1>💱 Zim Currency Converter</h1>
+		<button id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">☀️</button>
+	</header>
+
+	<main>
+		<form id="converter-form" aria-label="Currency converter" novalidate>
+			<label for="amount">Amount</label>
+			<input id="amount" name="amount" type="number" inputmode="decimal" min="0" step="any" required />
+
+			<div class="currency-row">
+				<div class="group from">
+					<label for="from">From</label>
+					<select id="from" name="from" aria-label="From currency"></select>
+				</div>
+
+				<button id="swap" type="button" aria-label="Swap currencies">⇄</button>
+
+				<div class="group to">
+					<label for="to">To</label>
+					<select id="to" name="to" aria-label="To currency"></select>
+				</div>
+			</div>
+
+			<button type="submit">Convert</button>
+		</form>
+
+		<section class="result-panel" aria-live="polite" hidden>
+			<p class="conversion-text"></p>
+			<p class="rate-text"></p>
+			<p class="timestamp"></p>
+		</section>
+	</main>
+
+	<footer>
+		<p>Rates by ExchangeRate-API</p>
+	</footer>
+</body>
+</html>
+

@@ -1,0 +1,69 @@
+@charset "utf-8";
+
+/* Design tokens (placeholders) — final values defined in Task 2.1 */
+:root {
+	--color-surface: #F8F9FA;
+	--color-surface-elevated: #FFFFFF;
+	--color-surface-subdued: #E9ECEF;
+	--color-text-primary: #212529;
+	--color-text-secondary: #6C757D;
+	--color-border: #DEE2E6;
+	--color-border-focus: #ADB5BD;
+	--color-accent: #0D6EFD;
+	--color-accent-hover: #0B5ED7;
+	--color-accent-text: #FFFFFF;
+	--color-success: #198754;
+	--color-error: #DC3545;
+	--color-warning: #FFC107;
+
+	--space-xs: 4px;
+	--space-sm: 8px;
+	--space-md: 16px;
+	--space-lg: 24px;
+	--space-xl: 32px;
+	--space-2xl: 48px;
+	--space-3xl: 64px;
+
+	--font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--font-size-xs: 0.75rem;
+	--font-size-sm: 0.875rem;
+	--font-size-base: 1rem;
+	--font-size-lg: 1.25rem;
+	--font-size-xl: 1.5rem;
+	--font-size-2xl: 2rem;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-bold: 700;
+	--line-height: 1.6;
+
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+	--radius-full: 9999px;
+
+	--shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+	--shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+	--shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+
+	--transition-fast: 150ms ease;
+	--transition-base: 250ms ease;
+}
+
+/* Minimal base styles for the initial scaffold */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+	margin: 0;
+	font-family: var(--font-family);
+	font-size: var(--font-size-base);
+	line-height: var(--line-height);
+	color: var(--color-text-primary);
+	background: var(--color-surface);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+header { display:flex; align-items:center; justify-content:space-between; padding:var(--space-md); }
+main { padding: var(--space-md); max-width: 720px; margin: 0 auto; }
+form { display:flex; flex-direction:column; gap:var(--space-md); }
+
