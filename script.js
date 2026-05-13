@@ -55,10 +55,42 @@ function populateCurrencySelects() {
   toSelect.value = 'ZAR';
 }
 
+function initTheme() {
+  const toggle = document.getElementById('theme-toggle');
+  const html = document.documentElement;
+  if (!toggle) return;
+
+  const updateToggleUI = (theme) => {
+    toggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    toggle.setAttribute('aria-pressed', theme === 'dark');
+  };
+
+  const setTheme = (theme) => {
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    updateToggleUI(theme);
+  };
+
+  toggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme') || 'light';
+    setTheme(currentTheme === 'light' ? 'dark' : 'light');
+  });
+
+  // Sync UI with initial state (set by head script)
+  updateToggleUI(html.getAttribute('data-theme') || 'light');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('converter-form');
   if (form) form.addEventListener('submit', (e) => e.preventDefault());
 
   populateCurrencySelects();
-  console.log('zim-currency-converter initialized: currency selects populated');
+  initTheme();
+
+  // Enable transitions after initial paint to prevent theme flash
+  setTimeout(() => {
+    document.documentElement.setAttribute('data-theme-ready', 'true');
+  }, 20);
+
+  console.log('zim-currency-converter initialized');
 });

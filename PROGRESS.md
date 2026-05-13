@@ -38,6 +38,10 @@
 | 2026-05-13 | Antigravity | 2.4 | Typography & header styling | — | ✅ |
 | 2026-05-13 | Antigravity | 2.5 | Form elements styling | — | ✅ |
 | 2026-05-13 | Antigravity | 2.6 | Result panel styling | — | ✅ |
+| 2026-05-13 | Antigravity | 2.7 | Responsive adjustments | — | ✅ |
+| 2026-05-13 | Antigravity | 3.1 | Dark theme CSS variables | — | ✅ |
+| 2026-05-13 | Antigravity | 3.2 | Theme toggle button | — | ✅ |
+| 2026-05-13 | Antigravity | 3.3 | Theme transition polish | — | ✅ |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |

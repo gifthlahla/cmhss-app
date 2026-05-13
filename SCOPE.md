@@ -272,7 +272,7 @@ const CURRENCIES = [
 - Currency row layout correctly adapts at 400px breakpoint.
 - All text remains readable; no element overflows the card.
 
-- [ ] 2.7 — Responsive Adjustments
+- [x] 2.7 — Responsive Adjustments
 
 ---
 
@@ -294,7 +294,7 @@ const CURRENCIES = [
 - Text maintains readability against backgrounds (check with a contrast checker tool).
 - The 60-30-10 balance is visually preserved.
 
-- [ ] 3.1 — Dark Theme CSS Variables
+- [x] 3.1 — Dark Theme CSS Variables
 
 ---
 
@@ -317,7 +317,7 @@ const CURRENCIES = [
 - A first-time visitor whose OS uses dark mode sees the dark theme automatically.
 - No flash of the wrong theme on page load.
 
-- [ ] 3.2 — Theme Toggle Button
+- [x] 3.2 — Theme Toggle Button
 
 ---
 
@@ -335,7 +335,7 @@ const CURRENCIES = [
 - Reloading the page does not trigger visible transitions.
 - No jarring color flashes.
 
-- [ ] 3.3 — Theme Transition Polish
+- [x] 3.3 — Theme Transition Polish
 
 ---
 
