@@ -338,6 +338,4 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     document.documentElement.setAttribute('data-theme-ready', 'true');
   }, 20);
-
-  console.log('zim-currency-converter initialized');
 });
