@@ -1,6 +1,6 @@
 "use strict";
 
-const API_KEY = "YOUR_API_KEY";
+const API_KEY = "f76d6ceb9eaa3cb1df85ac71";
 const BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/`;
 
 const CACHE_DURATION = 60 * 1000; // 60 seconds

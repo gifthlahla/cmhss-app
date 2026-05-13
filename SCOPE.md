@@ -658,7 +658,7 @@ const CURRENCIES = [
 - Theme toggle works.
 - All features functional on the live site.
 
-- [ ] 5.8 — GitHub Pages Deployment
+- [x] 5.8 — GitHub Pages Deployment
 
 ---
 
@@ -682,7 +682,7 @@ const CURRENCIES = [
 - Screenshots are crisp and representative.
 - A first-time visitor can understand the project in 60 seconds.
 
-- [ ] 5.9 — README Finalization
+- [x] 5.9 — README Finalization
 
 ---
 
