@@ -49,21 +49,39 @@
 	--transition-base: 250ms ease;
 }
 
-/* Minimal base styles for the initial scaffold */
-*, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
+/* 2.2 — CSS Reset & Base Styles */
+*, *::before, *::after {
+	box-sizing: border-box;
 	margin: 0;
+	padding: 0;
+}
+
+html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
+}
+
+body {
 	font-family: var(--font-family);
 	font-size: var(--font-size-base);
 	line-height: var(--line-height);
 	color: var(--color-text-primary);
-	background: var(--color-surface);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--color-surface);
+	min-height: 100vh;
 }
 
-header { display:flex; align-items:center; justify-content:space-between; padding:var(--space-md); }
-main { padding: var(--space-md); max-width: 720px; margin: 0 auto; }
-form { display:flex; flex-direction:column; gap:var(--space-md); }
+input, select, button, textarea {
+	font-family: inherit;
+	font-size: inherit;
+}
+
+img, svg, video, canvas, audio {
+	display: block;
+	max-width: 100%;
+}
+
+ul {
+	list-style: none;
+}
 

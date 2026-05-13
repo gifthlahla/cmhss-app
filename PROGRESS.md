@@ -29,7 +29,11 @@
 
 | Date | Dev | Task ID | Description | Commit Hash | Status |
 |------|-----|---------|-------------|-------------|--------|
-| 2026-05-13 | SDC26 | 1.1 | Initialize repository structure | — | ⏳ |
+| 2026-05-13 | SDC26 | 1.1 | Initialize repository structure | — | ✅ |
+| 2026-05-13 | Antigravity | 1.2 | Build HTML semantic shell | — | ✅ |
+| 2026-05-13 | Antigravity | 1.3 | Currency dropdown population | — | ✅ |
+| 2026-05-13 | Antigravity | 2.1 | CSS custom properties (design tokens) | — | ✅ |
+| 2026-05-13 | Antigravity | 2.2 | CSS reset & base styles | — | ✅ |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |

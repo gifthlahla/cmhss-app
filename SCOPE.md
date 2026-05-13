@@ -33,7 +33,7 @@ zim-currency-converter/
 - Favicon loads in the browser tab.
 - `PROGRESS.md` contains the empty table ready for logging.
 
-- [ ] 1.1 — Initialize Repository & File Structure
+- [x] 1.1 — Initialize Repository & File Structure
 
 ---
 
@@ -60,7 +60,7 @@ zim-currency-converter/
 - Tab order is logical: Amount → From → Swap → To → Convert.
 - Page renders without CSS (plain HTML is clear and usable).
 
-- [ ] 1.2 — HTML Semantic Shell
+- [x] 1.2 — HTML Semantic Shell
 
 ---
 
@@ -111,7 +111,7 @@ const CURRENCIES = [
 - Defaults are ZWL (From) and ZAR (To).
 - Adding a new currency to the array populates both dropdowns without any other code change.
 
-- [ ] 1.3 — Currency Dropdown Population
+- [x] 1.3 — Currency Dropdown Population
 
 ---
 
@@ -135,7 +135,7 @@ const CURRENCIES = [
 - No hardcoded color or spacing values exist anywhere else in the stylesheet.
 - Variables follow the naming convention `--category-modifier`.
 
-- [ ] 2.1 — CSS Custom Properties (Design Tokens)
+- [x] 2.1 — CSS Custom Properties (Design Tokens)
 
 ---
 
@@ -157,7 +157,7 @@ const CURRENCIES = [
 - All text uses Inter font (or system fallback).
 - No unexpected browser-default margins or padding.
 
-- [ ] 2.2 — CSS Reset & Base Styles
+- [x] 2.2 — CSS Reset & Base Styles
 
 ---
 
