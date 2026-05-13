@@ -42,6 +42,8 @@
 | 2026-05-13 | Antigravity | 3.1 | Dark theme CSS variables | — | ✅ |
 | 2026-05-13 | Antigravity | 3.2 | Theme toggle button | — | ✅ |
 | 2026-05-13 | Antigravity | 3.3 | Theme transition polish | — | ✅ |
+| 2026-05-13 | Antigravity | 4.1 | ExchangeRate-API integration | — | ✅ |
+| 2026-05-13 | Antigravity | 4.2 | Conversion logic | — | ✅ |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |

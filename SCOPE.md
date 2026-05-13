@@ -363,7 +363,7 @@ const CURRENCIES = [
 - Unplugging the network shows a graceful error, not a console crash.
 - API key is defined once and easily replaceable.
 
-- [ ] 4.1 — ExchangeRate-API Integration
+- [x] 4.1 — ExchangeRate-API Integration
 
 ---
 
@@ -395,7 +395,7 @@ const CURRENCIES = [
 - ZWL results display without decimal places.
 - Thousand separators are correct for the locale.
 
-- [ ] 4.2 — Conversion Logic
+- [x] 4.2 — Conversion Logic
 
 ---
 
