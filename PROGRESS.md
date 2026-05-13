@@ -35,6 +35,8 @@
 | 2026-05-13 | Antigravity | 2.1 | CSS custom properties (design tokens) | — | ✅ |
 | 2026-05-13 | Antigravity | 2.2 | CSS reset & base styles | — | ✅ |
 | 2026-05-13 | Antigravity | 2.3 | Layout: card container | — | ✅ |
+| 2026-05-13 | Antigravity | 2.4 | Typography & header styling | — | ✅ |
+| 2026-05-13 | Antigravity | 2.5 | Form elements styling | — | ✅ |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |

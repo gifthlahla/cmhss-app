@@ -203,7 +203,7 @@ const CURRENCIES = [
 - All font sizes reference the typography scale tokens.
 - Line height keeps text from feeling cramped.
 
-- [ ] 2.4 — Typography & Header Styling
+- [x] 2.4 — Typography & Header Styling
 
 ---
 
@@ -228,7 +228,7 @@ const CURRENCIES = [
 - Button states provide clear feedback on hover and click.
 - Swap button is visually centered between the two dropdowns.
 
-- [ ] 2.5 — Form Elements Styling
+- [x] 2.5 — Form Elements Styling
 
 ---
 

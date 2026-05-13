@@ -109,3 +109,139 @@ body {
 	}
 }
 
+/* 2.4 — Typography & Header Styling */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--space-xl);
+}
+
+header h1 {
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-text-primary);
+}
+
+label {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin-bottom: var(--space-xs);
+	display: block;
+}
+
+#amount {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+}
+
+select {
+	font-size: var(--font-size-base);
+}
+
+footer {
+	font-size: var(--font-size-xs);
+	color: var(--color-text-secondary);
+	text-align: center;
+	margin-top: var(--space-lg);
+}
+
+/* 2.5 — Form Elements Styling */
+form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-md);
+}
+
+input, select {
+	width: 100%;
+	padding: var(--space-sm) var(--space-md);
+	border: 1.5px solid var(--color-border);
+	border-radius: var(--radius-sm);
+	background: var(--color-surface-elevated);
+	color: var(--color-text-primary);
+	transition: var(--transition-fast);
+}
+
+input:focus, select:focus {
+	border-color: var(--color-accent);
+	box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+	outline: none;
+}
+
+button[type="submit"] {
+	width: 100%;
+	padding: var(--space-md);
+	background: var(--color-accent);
+	color: var(--color-accent-text);
+	border: none;
+	border-radius: var(--radius-sm);
+	font-weight: var(--font-weight-medium);
+	cursor: pointer;
+	transition: var(--transition-base);
+}
+
+button[type="submit"]:hover {
+	background: var(--color-accent-hover);
+	transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+	transform: scale(0.98);
+}
+
+.currency-row {
+	display: flex;
+	align-items: flex-end;
+	gap: var(--space-sm);
+}
+
+.currency-row .group {
+	flex: 1;
+}
+
+#swap {
+	width: 40px;
+	height: 40px;
+	border-radius: var(--radius-full);
+	border: 1px solid var(--color-border);
+	background: var(--color-surface-elevated);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--font-size-lg);
+	transition: var(--transition-base);
+	flex-shrink: 0;
+	margin-bottom: 2px;
+}
+
+#swap:hover {
+	background: var(--color-surface-subdued);
+}
+
+#swap:active {
+	transform: rotate(180deg);
+}
+
+#theme-toggle {
+	width: 40px;
+	height: 40px;
+	border-radius: var(--radius-full);
+	border: 1px solid var(--color-border);
+	background: var(--color-surface-elevated);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: var(--transition-base);
+}
+
+#theme-toggle:hover {
+	background: var(--color-surface-subdued);
+}
+
