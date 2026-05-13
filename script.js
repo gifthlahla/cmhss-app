@@ -50,35 +50,49 @@ async function fetchRates(baseCurrency) {
 }
 
 const CURRENCIES = [
-  { code: "ZWL", name: "Zimbabwean Dollar",  flag: "🇿🇼" },
-  { code: "ZAR", name: "South African Rand", flag: "🇿🇦" },
-  { code: "BWP", name: "Botswana Pula",       flag: "🇧🇼" },
-  { code: "ZMW", name: "Zambian Kwacha",      flag: "🇿🇲" },
-  { code: "MWK", name: "Malawian Kwacha",     flag: "🇲🇼" },
-  { code: "MZN", name: "Mozambican Metical",  flag: "🇲🇿" },
-  { code: "AOA", name: "Angolan Kwanza",      flag: "🇦🇴" },
-  { code: "NAD", name: "Namibian Dollar",     flag: "🇳🇦" },
-  { code: "SZL", name: "Swazi Lilangeni",     flag: "🇸🇿" },
-  { code: "LSL", name: "Lesotho Loti",        flag: "🇱🇸" },
-  { code: "TZS", name: "Tanzanian Shilling",  flag: "🇹🇿" },
-  { code: "MGA", name: "Malagasy Ariary",     flag: "🇲🇬" },
-  { code: "MUR", name: "Mauritian Rupee",     flag: "🇲🇺" },
-  { code: "SCR", name: "Seychellois Rupee",   flag: "🇸🇨" },
-  { code: "KMF", name: "Comorian Franc",      flag: "🇰🇲" },
-  { code: "CDF", name: "Congolese Franc",     flag: "🇨🇩" },
-  { code: "USD", name: "US Dollar",           flag: "🇺🇸" },
-  { code: "EUR", name: "Euro",                flag: "🇪🇺" },
-  { code: "GBP", name: "British Pound",       flag: "🇬🇧" },
-  { code: "CNY", name: "Chinese Yuan",        flag: "🇨🇳" },
-  { code: "INR", name: "Indian Rupee",        flag: "🇮🇳" },
-  { code: "JPY", name: "Japanese Yen",        flag: "🇯🇵" },
-  { code: "AED", name: "UAE Dirham",          flag: "🇦🇪" }
+  { code: "ZWL", name: "Zimbabwean Dollar",  country: "zw" },
+  { code: "ZAR", name: "South African Rand", country: "za" },
+  { code: "BWP", name: "Botswana Pula",       country: "bw" },
+  { code: "ZMW", name: "Zambian Kwacha",      country: "zm" },
+  { code: "MWK", name: "Malawian Kwacha",     country: "mw" },
+  { code: "MZN", name: "Mozambican Metical",  country: "mz" },
+  { code: "AOA", name: "Angolan Kwanza",      country: "ao" },
+  { code: "NAD", name: "Namibian Dollar",     country: "na" },
+  { code: "SZL", name: "Swazi Lilangeni",     country: "sz" },
+  { code: "LSL", name: "Lesotho Loti",        country: "ls" },
+  { code: "TZS", name: "Tanzanian Shilling",  country: "tz" },
+  { code: "MGA", name: "Malagasy Ariary",     country: "mg" },
+  { code: "MUR", name: "Mauritian Rupee",     country: "mu" },
+  { code: "SCR", name: "Seychellois Rupee",   country: "sc" },
+  { code: "KMF", name: "Comorian Franc",      country: "km" },
+  { code: "CDF", name: "Congolese Franc",     country: "cd" },
+  { code: "USD", name: "US Dollar",           country: "us" },
+  { code: "EUR", name: "Euro",                country: "eu" },
+  { code: "GBP", name: "British Pound",       country: "gb" },
+  { code: "CNY", name: "Chinese Yuan",        country: "cn" },
+  { code: "INR", name: "Indian Rupee",        country: "in" },
+  { code: "JPY", name: "Japanese Yen",        country: "jp" },
+  { code: "AED", name: "UAE Dirham",          country: "ae" }
 ];
+
+const SYMBOL_MAP = {
+  "USD": "$", "EUR": "€", "GBP": "£", "ZAR": "R", "BWP": "P",
+  "ZWL": "Z$", "ZMW": "K", "MWK": "K", "MZN": "MT", "AOA": "Kz",
+  "NAD": "N$", "SZL": "L", "LSL": "L", "TZS": "Sh", "MGA": "Ar",
+  "MUR": "₨", "SCR": "SR", "KMF": "CF", "CDF": "FC", "CNY": "¥",
+  "INR": "₹", "JPY": "¥", "AED": "د.إ"
+};
+
+function getSymbol(code) {
+  return SYMBOL_MAP[code] || "$";
+}
+
 
 function createOption(currency) {
   const opt = document.createElement('option');
   opt.value = currency.code;
-  opt.textContent = `${currency.flag} ${currency.code} – ${currency.name}`;
+  // Fallback text for the hidden native select
+  opt.textContent = `${currency.code} – ${currency.name}`;
   opt.setAttribute('aria-label', `${currency.name} (${currency.code})`);
   return opt;
 }
@@ -88,20 +102,165 @@ function populateCurrencySelects() {
   const toSelect = document.getElementById('to');
   if (!fromSelect || !toSelect) return;
 
-  // Clear existing options (if any)
   fromSelect.innerHTML = '';
   toSelect.innerHTML = '';
 
   CURRENCIES.forEach((c) => {
-    const optionA = createOption(c);
-    const optionB = createOption(c);
-    fromSelect.appendChild(optionA);
-    toSelect.appendChild(optionB);
+    fromSelect.appendChild(createOption(c));
+    toSelect.appendChild(createOption(c));
   });
 
-  // Defaults: From = ZWL, To = ZAR
+  // Set defaults
   fromSelect.value = 'ZWL';
   toSelect.value = 'ZAR';
+
+  // Update Symbol Init
+  const symbolEl = document.getElementById('currency-symbol');
+  if (symbolEl) symbolEl.textContent = getSymbol('ZWL');
+
+  // Initialize Custom Selects
+  new CustomSelect(fromSelect);
+  new CustomSelect(toSelect);
+
+  // Listen for changes to update symbol
+  fromSelect.addEventListener('change', (e) => {
+    if (symbolEl) symbolEl.textContent = getSymbol(e.target.value);
+  });
+}
+
+class CustomSelect {
+  constructor(nativeSelect) {
+    this.nativeSelect = nativeSelect;
+    this.container = nativeSelect.parentElement;
+    this.isOpen = false;
+    this.options = CURRENCIES;
+    this.filteredOptions = [...this.options];
+
+    this.render();
+    this.setupEvents();
+  }
+
+  render() {
+    const selectedValue = this.nativeSelect.value;
+    const selectedOption = this.options.find(o => o.code === selectedValue);
+
+    this.container.innerHTML = '';
+    this.container.appendChild(this.nativeSelect);
+
+    const customEl = document.createElement('div');
+    customEl.className = 'custom-select';
+    
+    customEl.innerHTML = `
+      <div class="custom-select-trigger" tabindex="0">
+        <img src="${getFlagUrl(selectedOption.country)}" class="flag-icon" alt="">
+        <span class="currency-code">${selectedOption.code}</span>
+        <span class="chevron">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </span>
+      </div>
+      <div class="custom-select-dropdown">
+        <div class="custom-select-search-container">
+          <input type="text" class="custom-select-search" placeholder="Search currency..." spellcheck="false">
+        </div>
+        <div class="custom-select-options"></div>
+      </div>
+    `;
+
+    this.container.appendChild(customEl);
+    this.customEl = customEl;
+    this.trigger = customEl.querySelector('.custom-select-trigger');
+    this.dropdown = customEl.querySelector('.custom-select-dropdown');
+    this.searchInput = customEl.querySelector('.custom-select-search');
+    this.optionsList = customEl.querySelector('.custom-select-options');
+
+    this.renderOptions();
+  }
+
+  renderOptions() {
+    this.optionsList.innerHTML = '';
+    this.filteredOptions.forEach((opt) => {
+      const isSelected = opt.code === this.nativeSelect.value;
+      const optionEl = document.createElement('div');
+      optionEl.className = `custom-select-option ${isSelected ? 'selected' : ''}`;
+      optionEl.innerHTML = `
+        <img src="${getFlagUrl(opt.country)}" class="flag-icon" alt="" loading="lazy">
+        <span class="currency-code">${opt.code}</span>
+        <span class="currency-name">${opt.name}</span>
+      `;
+      optionEl.onclick = () => this.selectOption(opt.code);
+      this.optionsList.appendChild(optionEl);
+    });
+  }
+
+  setupEvents() {
+    this.trigger.onclick = (e) => {
+      e.stopPropagation();
+      this.toggle();
+    };
+
+    this.searchInput.onclick = (e) => e.stopPropagation();
+    this.searchInput.oninput = (e) => this.filterOptions(e.target.value);
+
+    document.addEventListener('click', () => this.close());
+
+    this.nativeSelect.addEventListener('change', () => this.updateTrigger());
+
+    this.trigger.onkeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.toggle();
+      } else if (e.key === 'Escape') {
+        this.close();
+      }
+    };
+  }
+
+  toggle() {
+    this.isOpen ? this.close() : this.open();
+  }
+
+  open() {
+    this.isOpen = true;
+    this.customEl.classList.add('open');
+    this.searchInput.value = '';
+    this.filterOptions('');
+    setTimeout(() => this.searchInput.focus(), 50);
+    
+    // Close other custom selects
+    document.querySelectorAll('.custom-select.open').forEach(el => {
+      if (el !== this.customEl) el.classList.remove('open');
+    });
+  }
+
+  close() {
+    this.isOpen = false;
+    this.customEl.classList.remove('open');
+  }
+
+  filterOptions(query) {
+    const q = query.toLowerCase();
+    this.filteredOptions = this.options.filter(o => 
+      o.code.toLowerCase().includes(q) || 
+      o.name.toLowerCase().includes(q)
+    );
+    this.renderOptions();
+  }
+
+  selectOption(code) {
+    this.nativeSelect.value = code;
+    this.nativeSelect.dispatchEvent(new Event('change'));
+    this.close();
+    this.updateTrigger();
+  }
+
+  updateTrigger() {
+    const selectedOption = this.options.find(o => o.code === this.nativeSelect.value);
+    const flag = this.trigger.querySelector('.flag-icon');
+    const code = this.trigger.querySelector('.currency-code');
+    
+    flag.src = getFlagUrl(selectedOption.country);
+    code.textContent = selectedOption.code;
+  }
 }
 
 function initTheme() {
@@ -110,7 +269,7 @@ function initTheme() {
   if (!toggle) return;
 
   const updateToggleUI = (theme) => {
-    toggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+    // Icons are handled via CSS classes for light/dark
     toggle.setAttribute('aria-pressed', theme === 'dark');
   };
 
@@ -160,6 +319,26 @@ function formatRate(rate) {
   return rate.toPrecision(6);
 }
 
+function triggerCelebration() {
+  const panel = document.querySelector('.result-panel');
+  const container = document.createElement('div');
+  container.className = 'celebration';
+  panel.appendChild(container);
+
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+    p.style.setProperty('--tx', `${(Math.random() - 0.5) * 200}px`);
+    p.style.setProperty('--ty', `${(Math.random() - 0.5) * 200}px`);
+    p.style.left = '50%';
+    p.style.top = '50%';
+    container.appendChild(p);
+  }
+
+  setTimeout(() => container.remove(), 1000);
+}
+
 function showResult(amount, from, converted, to, rate, timestamp) {
   const panel = document.querySelector('.result-panel');
   if (!panel) return;
@@ -168,10 +347,11 @@ function showResult(amount, from, converted, to, rate, timestamp) {
   panel.removeAttribute('role'); 
   panel.hidden = false;
   
-  // Trigger pop animation
+  // Trigger pop animation and celebration
   panel.classList.remove('success-pop');
   void panel.offsetWidth; // Force reflow
   panel.classList.add('success-pop');
+  triggerCelebration();
   
   panel.querySelector('.conversion-text').textContent = `${formatCurrency(amount, from)} ${from} = ${formatCurrency(converted, to)} ${to}`;
   panel.querySelector('.rate-text').textContent = `1 ${from} = ${formatRate(rate)} ${to}`;
