@@ -1,26 +1,3 @@
-# zim-currency-converter
-
-A minimalist, real-time currency converter for Zimbabwe and the SADC region — built with vanilla HTML, CSS & JavaScript, featuring live rates, light/dark themes, and a clean 60-30-10 design system.
-
----
-
-## Features
-
-- **Real-Time Conversion** — Fetches live rates from ExchangeRate-API (160+ currencies)
-- **SADC-Focused** — All 16 SADC member currencies plus 7 major trading currencies (23 total)
-- **Light/Dark Mode** — Clean theme switching with system preference detection and persistence
-- **One-Click Swap** — Instantly reverse the base and target currencies
-- **Minimalist UI** — Built on the 60-30-10 color rule for a balanced, professional aesthetic
-- **Accessible** — Semantic HTML, keyboard navigation, ARIA labels, and screen-reader friendly
-- **Responsive** — Works seamlessly from 320px mobile to desktop
-- **Live Timestamp** — Always shows when the rates were last updated
-- **ZWL Native** — Zimbabwean Dollar formatted correctly with no decimal places
-
----
-
-## 🛠 Tech Stack
-
-| Layer | Technology |
 |---|---|
 | Structure | HTML5 (Semantic, Accessible) |
 | Styling | CSS3 (Custom Properties, Flexbox, Media Queries) |
