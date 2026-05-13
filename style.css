@@ -245,3 +245,52 @@ button[type="submit"]:active {
 	background: var(--color-surface-subdued);
 }
 
+/* 2.6 — Result Panel Styling */
+.result-panel {
+	background: var(--color-surface-subdued);
+	border-radius: var(--radius-md);
+	padding: var(--space-lg);
+	margin-top: var(--space-lg);
+	transition: var(--transition-base);
+}
+
+.result-panel[hidden] {
+	display: none;
+}
+
+.conversion-text {
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-accent);
+	margin-bottom: var(--space-xs);
+}
+
+.rate-text {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-secondary);
+}
+
+.timestamp {
+	font-size: var(--font-size-xs);
+	color: var(--color-text-secondary);
+	font-style: italic;
+	border-top: 1px solid var(--color-border);
+	padding-top: var(--space-sm);
+	margin-top: var(--space-sm);
+}
+
+/* Error state */
+.result-panel.error {
+	background-color: rgba(220, 53, 69, 0.08);
+	border: 1px solid var(--color-error);
+}
+
+.result-panel.error .conversion-text,
+.result-panel.error .rate-text {
+	color: var(--color-error);
+}
+
+.result-panel.error .timestamp {
+	border-top-color: rgba(220, 53, 69, 0.2);
+}
+

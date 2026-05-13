@@ -251,7 +251,7 @@ const CURRENCIES = [
 - Timestamp is clearly separated from the rate by a subtle divider.
 - Error class visually differentiates from success.
 
-- [ ] 2.6 — Result Panel Styling
+- [x] 2.6 — Result Panel Styling
 
 ---
 
