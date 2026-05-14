@@ -1,4 +1,5 @@
 |---|---|
+|---|---|
 | Structure | HTML5 (Semantic, Accessible) |
 | Styling | CSS3 (Custom Properties, Flexbox, Media Queries) |
 | Logic | Vanilla JavaScript (ES6+, Strict Mode) |
