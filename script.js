@@ -87,6 +87,10 @@ function getSymbol(code) {
   return SYMBOL_MAP[code] || "$";
 }
 
+function getFlagUrl(countryCode) {
+  return `https://hatscripts.github.io/circle-flags/flags/${countryCode.toLowerCase()}.svg`;
+}
+
 
 function createOption(currency) {
   const opt = document.createElement('option');
@@ -135,6 +139,7 @@ class CustomSelect {
     this.isOpen = false;
     this.options = CURRENCIES;
     this.filteredOptions = [...this.options];
+    this.highlightedIndex = -1;
 
     this.render();
     this.setupEvents();
@@ -150,8 +155,9 @@ class CustomSelect {
     const customEl = document.createElement('div');
     customEl.className = 'custom-select';
     
+    const listboxId = `${this.nativeSelect.id}-listbox`;
     customEl.innerHTML = `
-      <div class="custom-select-trigger" tabindex="0">
+      <div class="custom-select-trigger" tabindex="0" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="${listboxId}">
         <img src="${getFlagUrl(selectedOption.country)}" class="flag-icon" alt="">
         <span class="currency-code">${selectedOption.code}</span>
         <span class="chevron">
@@ -160,9 +166,9 @@ class CustomSelect {
       </div>
       <div class="custom-select-dropdown">
         <div class="custom-select-search-container">
-          <input type="text" class="custom-select-search" placeholder="Search currency..." spellcheck="false">
+          <input type="text" class="custom-select-search" placeholder="Search currency..." spellcheck="false" aria-label="Search currency" role="searchbox">
         </div>
-        <div class="custom-select-options"></div>
+        <div id="${listboxId}" class="custom-select-options" role="listbox" aria-label="Currency options"></div>
       </div>
     `;
 
@@ -178,10 +184,15 @@ class CustomSelect {
 
   renderOptions() {
     this.optionsList.innerHTML = '';
-    this.filteredOptions.forEach((opt) => {
+    this.filteredOptions.forEach((opt, index) => {
       const isSelected = opt.code === this.nativeSelect.value;
+      if (isSelected && this.highlightedIndex === -1) {
+        this.highlightedIndex = index;
+      }
       const optionEl = document.createElement('div');
-      optionEl.className = `custom-select-option ${isSelected ? 'selected' : ''}`;
+      optionEl.className = `custom-select-option ${isSelected ? 'selected' : ''} ${index === this.highlightedIndex ? 'highlighted' : ''}`;
+      optionEl.setAttribute('role', 'option');
+      optionEl.setAttribute('aria-selected', isSelected ? 'true' : 'false');
       optionEl.innerHTML = `
         <img src="${getFlagUrl(opt.country)}" class="flag-icon" alt="" loading="lazy">
         <span class="currency-code">${opt.code}</span>
@@ -190,6 +201,7 @@ class CustomSelect {
       optionEl.onclick = () => this.selectOption(opt.code);
       this.optionsList.appendChild(optionEl);
     });
+    this.updateHighlight();
   }
 
   setupEvents() {
@@ -211,8 +223,69 @@ class CustomSelect {
         this.toggle();
       } else if (e.key === 'Escape') {
         this.close();
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!this.isOpen) {
+          this.open();
+        } else {
+          this.highlightNextOption();
+        }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!this.isOpen) {
+          this.open();
+        } else {
+          this.highlightPreviousOption();
+        }
       }
     };
+
+    this.searchInput.onkeydown = (e) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        this.highlightNextOption();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        this.highlightPreviousOption();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        this.selectHighlightedOption();
+      } else if (e.key === 'Escape') {
+        this.close();
+        this.trigger.focus();
+      }
+    };
+  }
+
+  highlightNextOption() {
+    if (this.filteredOptions.length === 0) return;
+    this.highlightedIndex = (this.highlightedIndex + 1) % this.filteredOptions.length;
+    this.updateHighlight();
+  }
+
+  highlightPreviousOption() {
+    if (this.filteredOptions.length === 0) return;
+    this.highlightedIndex = (this.highlightedIndex - 1 + this.filteredOptions.length) % this.filteredOptions.length;
+    this.updateHighlight();
+  }
+
+  selectHighlightedOption() {
+    if (this.highlightedIndex >= 0 && this.highlightedIndex < this.filteredOptions.length) {
+      this.selectOption(this.filteredOptions[this.highlightedIndex].code);
+      this.trigger.focus();
+    }
+  }
+
+  updateHighlight() {
+    const optionElements = this.optionsList.querySelectorAll('.custom-select-option');
+    optionElements.forEach((el, index) => {
+      if (index === this.highlightedIndex) {
+        el.classList.add('highlighted');
+        el.scrollIntoView({ block: 'nearest' });
+      } else {
+        el.classList.remove('highlighted');
+      }
+    });
   }
 
   toggle() {
@@ -222,6 +295,7 @@ class CustomSelect {
   open() {
     this.isOpen = true;
     this.customEl.classList.add('open');
+    this.trigger.setAttribute('aria-expanded', 'true');
     this.searchInput.value = '';
     this.filterOptions('');
     setTimeout(() => this.searchInput.focus(), 50);
@@ -235,6 +309,7 @@ class CustomSelect {
   close() {
     this.isOpen = false;
     this.customEl.classList.remove('open');
+    this.trigger.setAttribute('aria-expanded', 'false');
   }
 
   filterOptions(query) {
@@ -492,6 +567,9 @@ function initSwap() {
     const temp = fromSelect.value;
     fromSelect.value = toSelect.value;
     toSelect.value = temp;
+
+    fromSelect.dispatchEvent(new Event('change'));
+    toSelect.dispatchEvent(new Event('change'));
 
     // 2. Animate rotation (cumulative)
     rotation += 180;

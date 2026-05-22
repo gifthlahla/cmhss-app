@@ -14,7 +14,7 @@
 	--color-accent-text: #FFFFFF;
 	--color-success: #198754;
 	--color-error: #DC3545;
-	--color-success: #198754;
+
 
 	/* Glassmorphism Tokens */
 	--color-surface-glass: rgba(255, 255, 255, 0.7);
@@ -433,9 +433,7 @@ button[type="submit"]:disabled {
 	transform: rotate(180deg);
 }
 
-#swap:active svg {
-	transform: rotate(180deg);
-}
+
 
 /* Custom Select Styling */
 .select-wrapper {
@@ -685,3 +683,11 @@ button {
 	transition: background-color var(--transition-base), transform var(--transition-base);
 }
 
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
