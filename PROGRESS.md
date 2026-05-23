@@ -30,32 +30,32 @@
 | Date | Dev | Task ID | Description | Commit Hash | Status |
 |------|-----|---------|-------------|-------------|--------|
 | 2026-05-13 | SDC26 | 1.1 | Initialize repository structure | — | ✅ |
-| 2026-05-13 | Antigravity | 1.2 | Build HTML semantic shell | — | ✅ |
-| 2026-05-13 | Antigravity | 1.3 | Currency dropdown population | — | ✅ |
-| 2026-05-13 | Antigravity | 2.1 | CSS custom properties (design tokens) | — | ✅ |
-| 2026-05-13 | Antigravity | 2.2 | CSS reset & base styles | — | ✅ |
-| 2026-05-13 | Antigravity | 2.3 | Layout: card container | — | ✅ |
-| 2026-05-13 | Antigravity | 2.4 | Typography & header styling | — | ✅ |
-| 2026-05-13 | Antigravity | 2.5 | Form elements styling | — | ✅ |
-| 2026-05-13 | Antigravity | 2.6 | Result panel styling | — | ✅ |
-| 2026-05-13 | Antigravity | 2.7 | Responsive adjustments | — | ✅ |
-| 2026-05-13 | Antigravity | 3.1 | Dark theme CSS variables | — | ✅ |
-| 2026-05-13 | Antigravity | 3.2 | Theme toggle button | — | ✅ |
-| 2026-05-13 | Antigravity | 3.3 | Theme transition polish | — | ✅ |
-| 2026-05-13 | Antigravity | 4.1 | ExchangeRate-API integration | — | ✅ |
-| 2026-05-13 | Antigravity | 4.2 | Conversion logic | — | ✅ |
-| 2026-05-13 | Antigravity | 4.3 | Swap currencies function | — | ✅ |
-| 2026-05-13 | Antigravity | 4.4 | Loading & disabled states | — | ✅ |
-| 2026-05-13 | Antigravity | 4.5 | Error handling complete | — | ✅ |
-| 2026-05-13 | Antigravity | 5.1 | Number formatting by currency | — | ✅ |
-| 2026-05-13 | Antigravity | 5.2 | SEO & meta tags | — | ✅ |
-| 2026-05-13 | Antigravity | 5.3 | Screen reader accessibility | — | ✅ |
-| 2026-05-13 | Antigravity | 5.4 | Animations & micro-interactions | — | ✅ |
-| 2026-05-13 | Antigravity | 5.5 | Favicon & meta tags | — | ✅ |
-| 2026-05-13 | Antigravity | 5.6 | Cross-browser testing | — | ✅ |
-| 2026-05-13 | Antigravity | 5.7 | Final code cleanup | — | ✅ |
-| 2026-05-13 | Antigravity | 5.8 | GitHub Pages deployment | — | ✅ |
-| 2026-05-13 | Antigravity | 5.9 | README finalization | — | ✅ |
+| 2026-05-13 | SDC 18 | 1.2 | Build HTML semantic shell | — | ✅ |
+| 2026-05-13 | SDC 18 | 1.3 | Currency dropdown population | — | ✅ |
+| 2026-05-13 | SDC 18 | 2.1 | CSS custom properties (design tokens) | — | ✅ |
+| 2026-05-13 | SDC 18 | 2.2 | CSS reset & base styles | — | ✅ |
+| 2026-05-13 | SDC 18 | 2.3 | Layout: card container | — | ✅ |
+| 2026-05-13 | SDC 18 | 2.4 | Typography & header styling | — | ✅ |
+| 2026-05-13 | SDC 18 | 2.5 | Form elements styling | — | ✅ |
+| 2026-05-13 | SDC 18 | 2.6 | Result panel styling | — | ✅ |
+| 2026-05-13 | SDC 18 | 2.7 | Responsive adjustments | — | ✅ |
+| 2026-05-13 | SDC 18 | 3.1 | Dark theme CSS variables | — | ✅ |
+| 2026-05-13 | SDC 18 | 3.2 | Theme toggle button | — | ✅ |
+| 2026-05-13 | SDC 18 | 3.3 | Theme transition polish | — | ✅ |
+| 2026-05-13 | SDC 18 | 4.1 | ExchangeRate-API integration | — | ✅ |
+| 2026-05-13 | SDC 18 | 4.2 | Conversion logic | — | ✅ |
+| 2026-05-13 | SDC 18 | 4.3 | Swap currencies function | — | ✅ |
+| 2026-05-13 | SDC 18 | 4.4 | Loading & disabled states | — | ✅ |
+| 2026-05-13 | SDC 18 | 4.5 | Error handling complete | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.1 | Number formatting by currency | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.2 | SEO & meta tags | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.3 | Screen reader accessibility | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.4 | Animations & micro-interactions | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.5 | Favicon & meta tags | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.6 | Cross-browser testing | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.7 | Final code cleanup | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.8 | GitHub Pages deployment | — | ✅ |
+| 2026-05-13 | SDC 18 | 5.9 | README finalization | — | ✅ |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |
 | — | — | — | — | — | — |
